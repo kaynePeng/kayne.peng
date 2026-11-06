@@ -25,6 +25,8 @@ VITE_BASE=/ npm run build
 
 线上地址：<https://kaynepeng.github.io/notes/>
 
+完整流程、故障排查、改名与自定义域名，见 [DEPLOY.md](DEPLOY.md)。
+
 推到 `main` 分支后，`.github/workflows/deploy.yml` 会自动构建并发布（GitHub Actions → Pages）。仓库需要是 Public（免费账户的 Pages 只支持公开仓库），且 **Settings → Pages → Build and deployment → Source** 需选 **GitHub Actions**。
 
 首次发布若只有 workflow 文件、还没有业务代码，构建会因为缺少 `package.json` 失败，把代码推上去重跑即可。
