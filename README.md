@@ -15,7 +15,7 @@ npm run dev
 npm run build      # 类型检查 + 构建，产物在 dist/
 ```
 
-构建时 `base` 默认是 `/kayne.peng/`（对应 `https://<user>.github.io/kayne.peng/`）。如果换成自定义域名或用户主页仓库，用环境变量覆盖：
+构建时 `base` 默认是 `/notes/`（对应 `https://<user>.github.io/notes/`）。如果换成自定义域名或用户主页仓库，用环境变量覆盖：
 
 ```bash
 VITE_BASE=/ npm run build
@@ -23,7 +23,7 @@ VITE_BASE=/ npm run build
 
 ## 发布
 
-线上地址：<https://kaynepeng.github.io/kayne.peng/>
+线上地址：<https://kaynepeng.github.io/notes/>
 
 推到 `main` 分支后，`.github/workflows/deploy.yml` 会自动构建并发布（GitHub Actions → Pages）。仓库需要是 Public（免费账户的 Pages 只支持公开仓库），且 **Settings → Pages → Build and deployment → Source** 需选 **GitHub Actions**。
 

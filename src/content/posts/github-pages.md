@@ -9,13 +9,13 @@ summary: 不用买服务器、不用备案。从仓库设置到自动发布，�
 
 ## 一、仓库与 Pages 设置
 
-新建一个公开仓库，名字就用站点名，比如 `kayne.peng`。发布出来的地址是：
+新建一个公开仓库，名字就用站点名，比如 `notes`。发布出来的地址是：
 
 ```
-https://<用户名>.github.io/kayne.peng/
+https://<用户名>.github.io/notes/
 ```
 
-注意末尾的 `/kayne.peng/`。这意味着构建时所有资源路径都要带上这个前缀，否则线上会整片 404，而本地开发却一切正常——这是最常见的坑。
+注意末尾的 `/notes/`。这意味着构建时所有资源路径都要带上这个前缀，否则线上会整片 404，而本地开发却一切正常——这是最常见的坑。
 
 ## 二、把 base 交给构建配置
 
@@ -23,7 +23,7 @@ Vite 项目里改一行 `base` 就够了：
 
 ```ts
 export default defineConfig(({ command }) => ({
-  base: process.env.VITE_BASE ?? (command === 'build' ? '/kayne.peng/' : '/'),
+  base: process.env.VITE_BASE ?? (command === 'build' ? '/notes/' : '/'),
 }))
 ```
 
