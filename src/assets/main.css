@@ -369,3 +369,40 @@ img {
   font-size: inherit;
   color: inherit;
 }
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  margin-block: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-block: 10px;
+}
+
+.prose th,
+.prose td {
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.prose th {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin-block: 30px;
+}

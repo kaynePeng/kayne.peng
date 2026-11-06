@@ -98,8 +98,21 @@ export function relatedPosts(slug: string, limit = 2): PostMeta[] {
   return allPosts.slice(index + 1, index + 1 + limit)
 }
 
+/**
+ * 文章里的图片按站点根路径写（`![](/images/x.png)`），构建时要补上部署前缀，
+ * 否则发布到 /notes/ 子路径后图片会 404。
+ */
+function withBase(html: string): string {
+  const base = import.meta.env.BASE_URL
+  if (!base || base === '/') return html
+  const prefix = base.startsWith('/') ? base.slice(1) : base
+  return html.replace(/(<img[^>]+src=")\/([^"]*)"/g, (_match, head: string, rest: string) =>
+    rest.startsWith(prefix) ? `${head}/${rest}"` : `${head}${base}${rest}"`,
+  )
+}
+
 export function renderMarkdown(body: string): string {
-  return md.render(body)
+  return withBase(md.render(body))
 }
 
 export function formatDate(date: string): string {

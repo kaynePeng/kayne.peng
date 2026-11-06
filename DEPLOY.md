@@ -43,6 +43,8 @@ git commit -m "说明这次改了什么"
 git push
 ```
 
+想在本地看「线上那套路径」下的效果（含 `/notes/` 前缀、图片、404 兜底），先用 `npm run build` 再 `npm run preview`，访问 `http://localhost:4173/notes/`。`preview` 会自动使用生产环境的 `base`。
+
 推送后 30–90 秒，Actions 会自动构建发布。看进度：仓库页 **Actions** 标签 → 最新一次 `Deploy to GitHub Pages`。
 
 > PowerShell 里 `npm run lint | Select-Object -Last 20` 会吞掉输出，看不到真实报错。要写成 `npm run lint *> lint.log; Get-Content lint.log`。

@@ -33,6 +33,8 @@ VITE_BASE=/ npm run build
 
 ## 改内容
 
+详细操作见 [WRITING.md](WRITING.md)（新增文章只改一个 `.md` 文件）。
+
 | 想改什么 | 改哪里 |
 | --- | --- |
 | 姓名、简介、社交链接 | `src/data/site.ts` |
