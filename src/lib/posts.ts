@@ -1,5 +1,3 @@
-import MarkdownIt from 'markdown-it'
-
 export interface PostMeta {
   slug: string
   title: string
@@ -19,12 +17,6 @@ const rawFiles = import.meta.glob('../content/posts/*.md', {
   import: 'default',
   eager: true,
 }) as Record<string, string>
-
-const md = new MarkdownIt({
-  html: false,
-  linkify: true,
-  typographer: true,
-})
 
 function parseFrontMatter(source: string): { data: Record<string, string>; body: string } {
   const data: Record<string, string> = {}
@@ -99,20 +91,12 @@ export function relatedPosts(slug: string, limit = 2): PostMeta[] {
 }
 
 /**
- * 文章里的图片按站点根路径写（`![](/images/x.png)`），构建时要补上部署前缀，
- * 否则发布到 /notes/ 子路径后图片会 404。
+ * 渲染正文。markdown-it 走动态 import，被拆成独立 chunk，
+ * 只有在打开文章页时才加载，首页和列表页不需要它。
  */
-function withBase(html: string): string {
-  const base = import.meta.env.BASE_URL
-  if (!base || base === '/') return html
-  const prefix = base.startsWith('/') ? base.slice(1) : base
-  return html.replace(/(<img[^>]+src=")\/([^"]*)"/g, (_match, head: string, rest: string) =>
-    rest.startsWith(prefix) ? `${head}/${rest}"` : `${head}${base}${rest}"`,
-  )
-}
-
-export function renderMarkdown(body: string): string {
-  return withBase(md.render(body))
+export async function renderMarkdown(body: string): Promise<string> {
+  const { renderBody } = await import('./markdown')
+  return renderBody(body)
 }
 
 export function formatDate(date: string): string {

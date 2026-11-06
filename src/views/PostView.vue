@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { ArrowLeft, ArrowUpRight } from 'lucide-vue-next'
 import { formatDate, getPost, relatedPosts, renderMarkdown } from '@/lib/posts'
@@ -7,8 +7,23 @@ import { formatDate, getPost, relatedPosts, renderMarkdown } from '@/lib/posts'
 const route = useRoute()
 
 const post = computed(() => getPost(String(route.params.slug ?? '')))
-const html = computed(() => (post.value ? renderMarkdown(post.value.body) : ''))
+const html = ref('')
 const next = computed(() => relatedPosts(String(route.params.slug ?? ''), 1))
+
+watch(
+  () => post.value?.slug,
+  async (slug) => {
+    const current = post.value
+    if (!slug || !current) {
+      html.value = ''
+      return
+    }
+    const rendered = await renderMarkdown(current.body)
+    // 切换文章的过程中可能有更晚的结果，落地前确认还是同一篇
+    if (post.value?.slug === slug) html.value = rendered
+  },
+  { immediate: true },
+)
 </script>
 
 <template>

@@ -14,4 +14,25 @@ export default defineConfig(({ command, isPreview }) => ({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    // 首屏只需要 Vue 运行时和路由；markdown-it 只在文章页按需加载。
+    // 把框架代码单独切出来，内容更新时浏览器还能复用旧的缓存。
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (!id.includes('node_modules')) return
+          if (
+            id.includes('markdown-it') ||
+            id.includes('linkify-it') ||
+            id.includes('mdurl') ||
+            id.includes('uc.micro') ||
+            id.includes('entities')
+          ) {
+            return 'markdown'
+          }
+          if (id.includes('/vue') || id.includes('@vue')) return 'vue'
+        },
+      },
+    },
+  },
 }))
