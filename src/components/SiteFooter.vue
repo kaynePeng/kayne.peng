@@ -3,6 +3,11 @@ import { RouterLink } from 'vue-router'
 import { nav, site } from '@/data/site'
 
 const year = new Date().getFullYear()
+
+function backToTop() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+}
 </script>
 
 <template>
@@ -22,7 +27,7 @@ const year = new Date().getFullYear()
       </div>
       <div class="footer-bottom">
         <p class="mono">© {{ year }} {{ site.name }}</p>
-        <p class="mono">Vue + TypeScript · 托管于 GitHub Pages</p>
+        <button type="button" class="mono to-top" @click="backToTop">回到顶部 ↑</button>
       </div>
     </div>
   </footer>
@@ -69,6 +74,26 @@ const year = new Date().getFullYear()
 
 .footer-link:hover {
   color: var(--accent);
+}
+
+.to-top {
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.to-top:hover {
+  color: var(--accent);
+}
+
+.to-top:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .footer-bottom {
