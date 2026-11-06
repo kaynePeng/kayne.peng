@@ -21,7 +21,7 @@ const groups = computed(() => {
       <p class="eyebrow">WRITING</p>
       <h1 class="list-title">文章</h1>
       <p class="list-intro">
-        关于前端工程、类型与界面的笔记。多是实际踩过的坑，写完顺便留档。
+        关于全栈工程、类型与界面的笔记，也写模型被接进产品之后的事。多是实际踩过的坑，写完顺便留档。
       </p>
       <p class="mono list-count">{{ allPosts.length }} 篇 · 按时间倒序</p>
     </section>

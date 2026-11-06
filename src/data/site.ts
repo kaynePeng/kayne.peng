@@ -27,7 +27,7 @@ export const site = {
   role: '全栈工程师',
   location: '永州 · 中国',
   title: 'Kayne Peng — 全栈工程师的笔记本',
-  description: '一个全栈工程师的笔记：关于 Vue、TypeScript、服务端与工程化，以及把事情做对的过程。',
+  description: '一个全栈工程师的笔记：关于 Vue、TypeScript、服务端、工程化与模型应用，以及把事情做对的过程。',
   tagline: '写代码，也写下为什么。',
   intro:
     '我做全栈：从界面一直做到接口、数据和模型能力。相信代码里最贵的东西是解释成本，所以这里尽量把结论和理由并排写出来。',
